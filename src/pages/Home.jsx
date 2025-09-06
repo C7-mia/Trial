@@ -1,19 +1,51 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import MovieCard from "../components/MovieCard.jsx";
 
-export default function Home() {
+export default function Movies() {
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const apiKey = import.meta.env.VITE_TMDB_API_KEY;
+        const res = await fetch(
+          `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
+        );
+        const data = await res.json();
+        setMovies(data.results || []);
+      } catch (err) {
+        console.error("Error fetching movies:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMovies();
+  }, []);
+
+  if (loading) {
+    return <p className="text-center mt-10">Loading movies...</p>;
+  }
+
+  if (movies.length === 0) {
+    return <p className="text-center mt-10">No movies found.</p>;
+  }
+
   return (
-    <div className="text-center">
-      <h1 className="text-3xl font-bold mb-4">🎬 Welcome to Movie App</h1>
-      <p className="text-gray-600 mb-6">
-        Browse movies, add your favorites, and learn more about them.
-      </p>
-      <Link
-        to="/movies"
-        className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700"
-      >
-        Explore Movies
-      </Link>
+    <div>
+      <h2 className="text-2xl font-bold mb-4">Popular Movies</h2>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {movies.map((movie) => (
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            onClick={() => navigate(`/movie/${movie.id}`)}
+          />
+        ))}
+      </div>
     </div>
   );
-}
+      }
