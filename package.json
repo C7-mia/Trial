@@ -5,35 +5,18 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "react-router-dom": "^6.16.0"
   },
   "devDependencies": {
+    "vite": "^5.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
     "cross-env": "^7.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "start:clean": "cross-env REACT_APP_CLEAR_STORAGE=true react-scripts start",
-    "clear-storage": "cross-env REACT_APP_CLEAR_STORAGE=true node -e \"console.log('🧹 localStorage will be cleared when app starts')\"",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start:clean": "cross-env REACT_APP_CLEAR_STORAGE=true vite",
+    "clear-storage": "cross-env REACT_APP_CLEAR_STORAGE=true node -e \"console.log('🧹 localStorage will be cleared when app starts')\""
   }
 }
