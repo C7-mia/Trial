@@ -1,16 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Components
-import Navbar from "./components/Navbar.jsx";
-import MovieDetails from "./components/MovieDetails.jsx";
-import MovieCard from "./components/MovieCard.jsx";
-
 // Pages
 import Home from "./pages/Home.jsx";
 import Movies from "./pages/Movies.jsx";
 import Favorites from "./pages/Favorites.jsx";
 import About from "./pages/About.jsx";
+import MovieDetails from "./components/MovieDetails.jsx";
+
+// Components
+import Navbar from "./components/Navbar.jsx";
 
 function App() {
   return (
